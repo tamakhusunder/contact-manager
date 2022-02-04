@@ -1,0 +1,16 @@
+{
+  "name": "contact_manager",
+  "version": "1.0.0",
+  "description": "contact manager using node",
+  "main": "server.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sunder Tamakhu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mongoose": "^6.2.0"
+  }
+}
