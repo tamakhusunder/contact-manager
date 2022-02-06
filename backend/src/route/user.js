@@ -3,7 +3,6 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { SECRET_KEY } = require('../config/env'); 
-
 const userModel = require('../models/user');
 
 router.get('/', function (req, res) {
@@ -16,9 +15,6 @@ router.get('/', function (req, res) {
     res.send('hello world');
     
   });
-
-
-  
 
 router.post('/signup', function (req, res) {
   userModel.find({email:req.body.email})
@@ -51,7 +47,6 @@ router.post('/signup', function (req, res) {
       }
     });
 });
-    
 
 router.post('/signin', function (req, res) {
   userModel.find({email:req.body.email})
@@ -76,6 +71,5 @@ router.post('/signin', function (req, res) {
       res.status(500).json({error:err});
     });
 });
-
 
 module.exports = router;
