@@ -5,18 +5,18 @@ const jwt = require('jsonwebtoken');
 const { SECRET_KEY } = require('../config/env'); 
 const userModel = require('../models/user');
 
-router.get('/', function (req, res) {
+router.get('/',  (req, res) => {
   let a='sunder';
   let b;
   const hash = bcrypt.hashSync(a, 10);
-  const reu=bcrypt.compareSync("sunder", hash); // true
+  const reu=bcrypt.compareSync("sunder", hash); 
   console.log(hash);
   console.log(reu);
     res.send('hello world');
     
   });
 
-router.post('/signup', function (req, res) {
+router.post('/signup',  (req, res) => {
   userModel.find({email:req.body.email})
     .exec()
     .then((user) =>{
@@ -48,7 +48,7 @@ router.post('/signup', function (req, res) {
     });
 });
 
-router.post('/signin', function (req, res) {
+router.post('/signin',  (req, res) => {
   userModel.find({email:req.body.email})
     .exec()
     .then((user) =>{
