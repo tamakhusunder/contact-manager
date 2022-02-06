@@ -55,7 +55,7 @@ router.post('/signin',  (req, res) => {
       if (user.length >=1) {
         const comparePassword = bcrypt.compareSync(req.body.password, user[0].password); // true
         if (comparePassword){
-          var token = jwt.sign({ email: user[0].email}, SECRET_KEY);
+          const token = jwt.sign({ email: user[0].email}, SECRET_KEY, {expiresIn: "2h",});
           res.status(200).json({token});
         }
         else{

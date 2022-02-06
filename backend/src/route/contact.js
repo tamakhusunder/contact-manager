@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/authenticate');
 const contactModel = require('../models/contact');
 
-router.get('/contacts', (req, res) => {
+router.get('/contacts', auth, (req, res) => {
   contactModel
     .find({})
     .exec()
@@ -14,7 +15,7 @@ router.get('/contacts', (req, res) => {
     });
 });
 
-router.post('/contacts', (req, res) => {
+router.post('/contacts', auth, (req, res) => {
   const contact = new contactModel({
     name : req.body.name,
     phone : req.body.phone,
@@ -30,7 +31,7 @@ router.post('/contacts', (req, res) => {
     });
 });
 
-router.put('/contacts/:id', (req, res) => {
+router.put('/contacts/:id', auth, (req, res) => {
   const {id} = req.params;
   const updateValue = {
     name : req.body.name,
@@ -48,7 +49,7 @@ router.put('/contacts/:id', (req, res) => {
 });
 
 
-router.delete('/contacts/:id',  (req, res) => {
+router.delete('/contacts/:id', auth,  (req, res) => {
   const {id} = req.params;
   contactModel.findByIdAndDelete(id, (err,docs) => {
     if(err) {
