@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+
+import './assets/css/App.css';
+import './assets/css/navbar.css'
+import './assets/css/home.css'
+import './assets/css/dashboard.css'
+
+import { Routes,Route } from "react-router-dom";
+import Home from './views/home';
+import Login from './views/login';
+import Signup from './views/signup';
+import NotFound from './views/notFound';
+import Dashboard from './views/dashboard';
+import AddContact from './views/addContact';
+import DeleteContact from './views/delete';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="*" element={<NotFound />}/>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/signup" element={<Signup />} /> 
+        <Route path="/dashboard" element={<Dashboard />} /> 
+        <Route path="/add" element={<AddContact />} /> 
+        <Route path="/edit-contact" element={<AddContact />} /> 
+        <Route path="/delete" element={<DeleteContact />} /> 
+    </Routes>
+    </>
   );
 }
 
