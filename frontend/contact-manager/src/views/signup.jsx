@@ -1,21 +1,53 @@
-import React from "react";
+import axios from "axios";
+import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../component/navbar";
 
 export default function Signup() {
+  const navigate = useNavigate();
+  const [formValue,setFormValue] = useState({
+    email : '',
+    password : ''
+  });
+
+  const handleChange = ((event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setFormValue({...formValue, [name]:value});
+  });
+
+  const handleSubmit = ((event) => {
+    event.preventDefault();
+    axios.post("http://localhost:5000/signup", formValue)
+      .then((response) => {
+        if(response.status === 200){
+          alert(JSON.stringify(response.data.message));
+          navigate("/login")
+        }
+
+      })
+      .catch((err) => {
+        console.log("err", err);
+        alert("Fail to create new user.")
+      });
+  });
+
   return (
     <>
       <Navbar />
-      <div className="container wrapper-top">
+      <div className="container">
         <h3 className="text-center">SignUp Page</h3>
-        <form>
+        <form method="post" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="Email">Email address</label>
             <input
               type="email"
               className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
               placeholder="Enter email"
+              name="email"
+              value={formValue.email}
+              onChange={handleChange}
+              required
             />
             <small id="emailHelp" className="form-text text-muted">
               We'll never share your email with anyone else.
@@ -26,8 +58,10 @@ export default function Signup() {
             <input
               type="password"
               className="form-control"
-              id="exampleInputPassword1"
               placeholder="Password"
+              name="password"
+              onChange={handleChange}
+              required
             />
           </div>
           <button
