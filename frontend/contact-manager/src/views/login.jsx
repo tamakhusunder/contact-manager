@@ -5,29 +5,27 @@ export default function Login() {
   return (
     <>
       <Navbar />
-      <div className="container wrapper-top">
+      <div className="container">
         <h3 className="text-center">Login Page</h3>
         <form>
           <div className="form-group">
             <label htmlFor="Email">Email address</label>
             <input
               type="email"
+              name="inputEmail"
               className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
               placeholder="Enter email"
+              required
             />
-            <small id="emailHelp" className="form-text text-muted">
-              We'll never share your email with anyone else.
-            </small>
           </div>
           <div className="form-group">
             <label htmlFor="Password">Password</label>
             <input
               type="password"
+              name="inputPassword"
               className="form-control"
-              id="exampleInputPassword1"
               placeholder="Password"
+              required
             />
           </div>
           <button
