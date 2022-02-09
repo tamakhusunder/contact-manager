@@ -24,7 +24,7 @@ router.post('/contacts', auth, (req, res) => {
   contact
     .save()
     .then((result) => {
-      res.status(200).json({msg : "Contact added"});
+      res.status(200).json({message : "Contact added"});
     })
     .catch((err) => {
       res.status(500).json({errror: err});
@@ -43,20 +43,20 @@ router.put('/contacts/:id', auth, (req, res) => {
       res.status(500).json(err);
     }
     else{
-      res.status(200).json({msg:"Data updated succesfully"});
+      res.status(200).json({message:"Data updated succesfully"});
     }
   });
 });
 
 
-router.delete('/contacts/:id', auth,  (req, res) => {
+router.delete('/contacts/:id', auth, (req, res) => {
   const {id} = req.params;
   contactModel.findByIdAndDelete(id, (err,docs) => {
     if(err) {
       res.status(500).json(err);
     }
     else{
-      res.status(200).json({msg:`${docs.name} data deleted`});
+      res.status(200).json({message:`${docs.name} data deleted`});
     }
   });
 });
