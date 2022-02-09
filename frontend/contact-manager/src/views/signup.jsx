@@ -1,36 +1,36 @@
 import axios from "axios";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../component/navbar";
 
 export default function Signup() {
   const navigate = useNavigate();
-  const [formValue,setFormValue] = useState({
-    email : '',
-    password : ''
+  const [formValue, setFormValue] = useState({
+    email: "",
+    password: "",
   });
 
-  const handleChange = ((event) => {
+  const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setFormValue({...formValue, [name]:value});
-  });
+    setFormValue({ ...formValue, [name]: value });
+  };
 
-  const handleSubmit = ((event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post("http://localhost:5000/signup", formValue)
+    axios
+      .post("http://localhost:5000/signup", formValue)
       .then((response) => {
-        if(response.status === 200){
+        if (response.status === 200) {
           alert(JSON.stringify(response.data.message));
-          navigate("/login")
+          navigate("/login");
         }
-
       })
       .catch((err) => {
         console.log("err", err);
-        alert("Fail to create new user.")
+        alert("Fail to create new user.");
       });
-  });
+  };
 
   return (
     <>
@@ -60,6 +60,7 @@ export default function Signup() {
               className="form-control"
               placeholder="Password"
               name="password"
+              value={formValue.password}
               onChange={handleChange}
               required
             />
