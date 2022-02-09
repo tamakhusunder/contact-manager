@@ -11,7 +11,7 @@ import Signup from './views/signup';
 import NotFound from './views/notFound';
 import Dashboard from './views/dashboard';
 import AddContact from './views/addContact';
-import DeleteContact from './views/delete';
+import EditContact from './views/editContact';
 
 function App() {
   return (
@@ -23,8 +23,7 @@ function App() {
         <Route path="/signup" element={<Signup />} /> 
         <Route path="/dashboard" element={<Dashboard />} /> 
         <Route path="/add" element={<AddContact />} /> 
-        <Route path="/edit-contact" element={<AddContact />} /> 
-        <Route path="/delete" element={<DeleteContact />} /> 
+        <Route path="/edit/:id" element={<EditContact />} /> 
     </Routes>
     </>
   );
