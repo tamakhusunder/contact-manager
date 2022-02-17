@@ -1,6 +1,21 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
+const contactSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  phone: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: String,
+    required: true,
+  },
+});
+
 const userSchema = new Schema({
   email: {
     type: String,
@@ -13,6 +28,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  contact : [contactSchema]
 });
 
 const User = mongoose.model("UserModel", userSchema);
