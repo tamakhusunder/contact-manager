@@ -1,7 +1,9 @@
+const path = require('path');
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/authenticate');
 const contactModel = require('../models/contact');
+const upload = require('../middleware/upload');
 
 router.get('/contacts', auth, (req, res) => {
   contactModel
@@ -15,11 +17,12 @@ router.get('/contacts', auth, (req, res) => {
     });
 });
 
-router.post('/contacts', auth, (req, res) => {
+router.post('/contacts', upload.single('uploaded_image'), auth, (req, res) => {
+  console.log(req.file);
   const contact = new contactModel({
     name : req.body.name,
     phone : req.body.phone,
-    image : req.body.image,
+    image : req.file.path,
   });
   contact
     .save()
