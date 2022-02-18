@@ -6,10 +6,10 @@ const URL_CONTACTNODE = "http://localhost:5000/contacts/";
 
 export default function AddContact() {
   const navigate = useNavigate();
-  const [formValue, setFormValue] = useState({
+  const [contactInfo, setContactInfo] = useState({
     name: "",
     phone: "",
-    image: "",
+    uploaded_image: "",
   });
 
   const getToken = () => {
@@ -27,14 +27,26 @@ export default function AddContact() {
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setFormValue({ ...formValue, [name]: value });
+    setContactInfo({ ...contactInfo, [name]: value });
+  };
+
+  const handleFileChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.files[0];
+    setContactInfo({ ...contactInfo, [name]: value });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const headerData = getToken();
+    var formData = new FormData()
+    for (let i in contactInfo){
+      console.log(i,contactInfo[i])
+      formData.append(i,contactInfo[i]);
+    }
+   
     axios
-      .post(URL_CONTACTNODE, formValue, { headers: headerData })
+      .post(URL_CONTACTNODE, formData, { headers: headerData })
       .then((response) => {
         if (response.status === 200) {
           alert(JSON.stringify(response.data.message));
@@ -61,7 +73,7 @@ export default function AddContact() {
               placeholder="Enter Full Name"
               required
               name="name"
-              value={formValue.name}
+              value={contactInfo.name}
               onChange={handleChange}
             />
           </div>
@@ -74,21 +86,21 @@ export default function AddContact() {
               placeholder="Phone no."
               required
               name="phone"
-              value={formValue.phone}
+              value={contactInfo.phone}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
             <label htmlFor="image">Image</label>
             <input
-              type="text"
+              type="file"
               className="form-control"
               id="image"
               placeholder="Image"
-              name="image"
+              name="uploaded_image"
               required
-              value={formValue.image}
-              onChange={handleChange}
+              accept="image/*"
+              onChange={handleFileChange}
             />
           </div>
           <button
