@@ -68,7 +68,6 @@ export default function Dashboard() {
               <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">Phone number</th>
-              <th scope="col">Image</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -76,9 +75,8 @@ export default function Dashboard() {
             {contactData.map((el, index) => (
               <tr key={el._id} className="table-dark">
                 <td>{index + 1}</td>
-                <td>{el.name}</td>
+                <td><img src={`http://localhost:5000/${el.image}`} width="40px" height="40px" alt="pic" style={{borderRadius: "50%", marginRight: "5%"}}/>{el.name}</td>
                 <td>{el.phone}</td>
-                <td>{el.image}</td>
                 <td>
                   <button
                     onClick={() => navigate(`/edit/${el._id}`)}
